@@ -1,0 +1,17 @@
+const express = require('express')
+const dotenv = require('dotenv')
+const connection = require('./shared/connect')
+const fromauthentication = require('./routes/authentication')
+const fromitem = require('./routes/item')
+const cors = require('cors')
+const app = express()
+app.use(express.json())
+dotenv.config()
+connection.connect()
+app.use(cors())
+app.use('/',(req,res,next) =>{
+    next();
+})
+app.use('/login',fromauthentication)
+app.use('/',fromitem)
+app.listen(process.env.PORT || 5000)

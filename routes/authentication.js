@@ -1,0 +1,13 @@
+const express = require('express')
+const route = express.Router()
+const signup = require('../modules/signup')
+const fromModule = require('../modules/authenticate')
+route.post('/user/signup',signup.userSignup)
+route.post('/admin/signup',signup.adminSignup)
+route.post('/',fromModule.userLogin)
+route.post('/admin',fromModule.adminLogin)
+route.post('/admin/passwordreset',fromModule.adminpasswordreset)
+route.post('/admin/string/:id',fromModule.adminverify)
+route.patch('/passwordreset',fromModule.passwordReset)
+route.get('/string/:id',fromModule.verify)
+module.exports = route
